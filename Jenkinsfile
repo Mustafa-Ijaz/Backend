@@ -12,7 +12,7 @@ pipeline {
      }
     stage('Test') {
       steps {
-          sh 'docker container run -p 9090:8080 --name node -d mustafa75/backend'
+          sh 'docker container run -p 9090:8080 --name backend_container -d mustafa75/backend'
           sh 'curl -I http://localhost:9090'
           
       }
