@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: project-backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        tier: backend
+        app: myapp
+    spec:
+      containers:
+      - name: backend
+        image: mustafa75/backend
+        ports:
+        - containerPort: 8080
+          name: tcp
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: project-backend
+spec:
+  type:  NodePort
+  selector:
+    tier: backend
+    app:  myapp
+  ports:
+  - protocol: TCP 
+    port:  8080
+    targetPort:  9093
+    nodePort: 32000
